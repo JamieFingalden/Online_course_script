@@ -1,13 +1,13 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-str1 = input("你的学号")
+str1 = input("你的学号(10位数版本)")
 num = int(input("当前学习进度"))-1
 driver = webdriver.Chrome()
 driver.get("https://zjbti.rymooc.com/")
 driver.find_element(By.XPATH, '//*[@id="header-wrap"]/nav/div/div/div[2]/div[1]/div/a/span').click()
 time.sleep(1)
-driver.find_element(By.ID, 'Email').send_keys(f"23021111{str1}")
+driver.find_element(By.ID, 'Email').send_keys(f"{str1}")
 driver.find_element(By.ID, 'Password').send_keys("ryxy123A!")
 driver.find_element(By.XPATH, '//*[@id="loginForm"]/form/div[5]/input').click()
 time.sleep(1)
