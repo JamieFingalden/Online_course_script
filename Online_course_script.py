@@ -1,9 +1,34 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-str1 = input("你的学号(10位数版本)")
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
+str1 = input("你的学号")
 num = int(input("当前学习进度"))-1
-driver = webdriver.Chrome()
+
+# 设置 Chrome 浏览器选项
+options = Options()
+options.headless = True  # 启用无头模式
+options.add_argument("--disable-gpu")  # 禁用 GPU 加速
+options.add_argument("--no-sandbox")  # 禁用沙盒模式
+options.add_argument("--disable-dev-shm-usage")  # 禁用共享内存
+options.add_argument("--disable-extensions")  # 禁用扩展
+options.add_argument("--disable-images")  # 禁用图片加载
+options.add_argument("--blink-settings=imagesEnabled=false")  # 禁用 CSS 样式
+options.add_argument("--disable-javascript")  # 禁用 JavaScript（如果不需要 JavaScript 可以启用）
+
+# 启动 Chrome 浏览器，自动下载兼容的 ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+driver.implicitly_wait(5)
+
+
+# driver = webdriver.Chrome()
+driver.implicitly_wait(5)
 driver.get("https://zjbti.rymooc.com/")
 driver.find_element(By.XPATH, '//*[@id="header-wrap"]/nav/div/div/div[2]/div[1]/div/a/span').click()
 time.sleep(1)
